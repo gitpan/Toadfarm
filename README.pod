@@ -6,7 +6,7 @@ Toadfarm - One Mojolicious app to rule them all
 
 =head1 VERSION
 
-0.02
+0.03
 
 =head1 SYNOPSIS
 
@@ -33,16 +33,11 @@ and a set of HTTP headers to act on. Example:
 The config above will run C<My::App> when the "X-Request-Base" header is set
 to "http://mydomain.com/whatever".
 
-Or it will pass the request on to C<My::Other::App> if the "Host" header is
+Or it will pass the request on to C</path/to/my-app> if the "Host" header is
 set to "mydomain.com".
 
-NOTE: "X-Request-Base" is a special header: Normally the
-L<route|Mojolicious::Routes> object will be attached to the route object of
-the L<Toadfarm> route object. This does not happen with the "X-Request-Base"
-header.
-
-NOTE: The apps are processed in the order they are defined. This means that
-the first app that match will be executed.
+The apps are processed in the order they are defined. This means that the
+first app that match will be executed.
 
 =head2 Debug
 
@@ -67,6 +62,10 @@ Additional config params.
 
   {
     apps => [...], # See SYNOPSIS
+    log => {
+      file => '/path/to/log/file.log',
+      combined => 1, # true to make all applications log to the same file
+    },
     hypnotoad => {
       listen => ['http://*:1234'],
       workers => 12,
@@ -88,12 +87,20 @@ argument:
     # ...
   }
 
+=head1 EXAMPLE SETUP
+
+Look at L<https://github.com/jhthorsen/toadfarm/tree/etc/> for example
+resources which show how to start L<Toadfarm> on ubuntu. In addition, you can
+forward all traffic to the server using the "iptables" rule below:
+
+  $ iptables -A PREROUTING -i eth0 -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8080
+
 =cut
 
 use Mojo::Base 'Mojolicious';
 use Mojo::Util 'class_to_path';
 
-our $VERSION = eval '0.02';
+our $VERSION = eval '0.03';
 
 =head1 METHODS
 
@@ -111,12 +118,18 @@ sub startup {
     my @plugins = @{ $config->{plugins} || [] };
     my $n = 0;
 
+    $self->log->path($config->{log}{file}) if $config->{log}{file};
+    delete $self->log->{handle};
+
     while(@apps) {
       my($path, $rules) = (shift @apps, shift @apps);
       my($app, $r, $request_base, @over);
 
+      delete local $ENV{MOJO_CONFIG};
       $path = class_to_path $path unless -e $path;
       $app = Mojo::Server->new->load_app($path);
+
+      $app->log($self->log) if $config->{log}{combined};
 
       while(my($name, $value) = each %$rules) {
         $request_base = $value if $name eq 'X-Request-Base';
