@@ -6,7 +6,7 @@ Toadfarm - One Mojolicious app to rule them all
 
 =head1 VERSION
 
-0.03
+0.04
 
 =head1 SYNOPSIS
 
@@ -87,6 +87,8 @@ argument:
     # ...
   }
 
+See also: L<Toadfarm::Plugin::Reload/SYNOPSIS>.
+
 =head1 EXAMPLE SETUP
 
 Look at L<https://github.com/jhthorsen/toadfarm/tree/etc/> for example
@@ -95,12 +97,16 @@ forward all traffic to the server using the "iptables" rule below:
 
   $ iptables -A PREROUTING -i eth0 -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8080
 
+=head1 PLUGINS
+
+L<Toadfarm::Plugin::Reload>.
+
 =cut
 
 use Mojo::Base 'Mojolicious';
 use Mojo::Util 'class_to_path';
 
-our $VERSION = eval '0.03';
+our $VERSION = eval '0.04';
 
 =head1 METHODS
 
@@ -111,56 +117,60 @@ This method will read the C<MOJO_CONFIG> and mount the applications specified.
 =cut
 
 sub startup {
-    my $self = shift;
-    my $routes = $self->routes;
-    my $config = $self->_config;
-    my @apps = @{ $config->{apps} || [] };
-    my @plugins = @{ $config->{plugins} || [] };
-    my $n = 0;
+  my $self = shift;
+  my $config = $ENV{MOJO_CONFIG} ? $self->plugin('Config') : {};
 
-    $self->log->path($config->{log}{file}) if $config->{log}{file};
-    delete $self->log->{handle};
-
-    while(@apps) {
-      my($path, $rules) = (shift @apps, shift @apps);
-      my($app, $r, $request_base, @over);
-
-      delete local $ENV{MOJO_CONFIG};
-      $path = class_to_path $path unless -e $path;
-      $app = Mojo::Server->new->load_app($path);
-
-      $app->log($self->log) if $config->{log}{combined};
-
-      while(my($name, $value) = each %$rules) {
-        $request_base = $value if $name eq 'X-Request-Base';
-        push @over, "return 0 unless +(\$h->header('$name') // '') eq '$value';\n";
-      }
-
-      $r = $routes->route('/*original_path')->detour(app => $app, original_path => '');
-
-      if(@over) {
-        unshift @over, "sub { my \$h = \$_[1]->req->headers;\n";
-        push @over, "\$_[1]->req->url->base(Mojo::URL->new('$request_base'));" if $request_base;
-        push @over, "return 1; }";
-        $routes->add_condition("toadfarm_condition_$n", => eval "@over" || die "@over: $@");
-        $r->over("toadfarm_condition_$n");
-      }
-
-      $n++;
-    }
-
-    while(@plugins) {
-      my($plugin, $config) = (shift @plugins, shift @plugins);
-      $self->plugin($plugin, $config);
-    }
+  $self->log->path($config->{log}{file}) if $config->{log}{file};
+  delete $self->log->{handle}; # Not sure why I need to reset the handle...
+  $self->_start_apps(@{ $config->{apps} }) if $config->{apps};
+  $self->_start_plugins(@{ $config->{plugins} }) if $config->{plugins};
 }
 
-sub _config {
+sub _start_apps {
+  my $self = shift;
+  my $routes = $self->routes;
+  my $n = 0;
+
+  while(@_) {
+    my($path, $rules) = (shift @_, shift @_);
+    my($app, $r, $request_base, @over);
+
+    delete local $ENV{MOJO_CONFIG};
+    $path = class_to_path $path unless -e $path;
+    $app = Mojo::Server->new->load_app($path);
+
+    $app->log($self->log) if $self->config->{log}{combined};
+
+    while(my($name, $value) = each %$rules) {
+      $request_base = $value if $name eq 'X-Request-Base';
+      push @over, "return 0 unless +(\$h->header('$name') // '') eq '$value';\n";
+    }
+
+    $r = $routes->route('/*original_path')->detour(app => $app, original_path => '');
+
+    if(@over) {
+      unshift @over, "sub { my \$h = \$_[1]->req->headers;\n";
+      push @over, "\$_[1]->req->url->base(Mojo::URL->new('$request_base'));" if $request_base;
+      push @over, "return 1; }";
+      $routes->add_condition("toadfarm_condition_$n", => eval "@over" || die "@over: $@");
+      $r->over("toadfarm_condition_$n");
+    }
+
+    $n++;
+  }
+
+  $self;
+}
+
+sub _start_plugins {
   my $self = shift;
 
-  return {} if $ENV{TOADFARM_THIS_WILL_PROBABLY_CHANGE};
-  die "You need to set MOJO_CONFIG\n" unless $ENV{MOJO_CONFIG};
-  $self->plugin('Config');
+  unshift @{ $self->plugins->namespaces }, 'Toadfarm::Plugin';
+
+  while(@_) {
+    my($plugin, $config) = (shift @_, shift @_);
+    $self->plugin($plugin, $config);
+  }
 }
 
 =head1 AUTHOR

@@ -1,0 +1,446 @@
+[Wed May  1 18:57:57 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 18:57:57 2013] [info] Reload watching /tmp/toadfarm-reload-test-ipc.conf every 0.1s.
+[Wed May  1 18:57:57 2013] [info] Listening at "http://*:8080".
+[Wed May  1 18:57:57 2013] [info] Manager 12429 started.
+[Wed May  1 18:57:57 2013] [debug] Worker 12430 started.
+[Wed May  1 18:57:57 2013] [debug] Worker 12431 started.
+[Wed May  1 18:57:57 2013] [info] Creating process id file "/home/jhthorsen/git/toadfarm/script/hypnotoad.pid".
+[Wed May  1 18:57:57 2013] [debug] Worker 12432 started.
+[Wed May  1 18:57:57 2013] [debug] Worker 12434 started.
+[Wed May  1 18:58:28 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 18:58:28 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 18:58:28 2013] [debug] Routing to a callback.
+[Wed May  1 18:58:28 2013] [info] Wrote payload to /tmp/toadfarm-reload-test-ipc.conf
+[Wed May  1 18:58:28 2013] [debug] 200 OK (0.002630s, 380.228/s).
+[Wed May  1 18:58:28 2013] [debug] Will not reload when  != master
+[Wed May  1 18:59:31 2013] [debug] Stopping worker 12434.
+[Wed May  1 18:59:31 2013] [debug] Stopping worker 12431.
+[Wed May  1 18:59:31 2013] [debug] Stopping worker 12432.
+[Wed May  1 18:59:31 2013] [debug] Stopping worker 12430.
+[Wed May  1 18:59:31 2013] [debug] Worker 12434 stopped.
+[Wed May  1 18:59:31 2013] [debug] Stopping worker 12431.
+[Wed May  1 18:59:31 2013] [debug] Worker 12432 stopped.
+[Wed May  1 18:59:31 2013] [debug] Stopping worker 12430.
+[Wed May  1 18:59:31 2013] [debug] Worker 12431 stopped.
+[Wed May  1 18:59:31 2013] [debug] Worker 12430 stopped.
+[Wed May  1 19:02:42 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:02:42 2013] [info] Reload watching /tmp/toadfarm-reload-test-ipc.conf every 0.1s.
+[Wed May  1 19:02:42 2013] [info] Listening at "http://*:8080".
+[Wed May  1 19:02:42 2013] [info] Manager 13219 started.
+[Wed May  1 19:02:42 2013] [debug] Worker 13220 started.
+[Wed May  1 19:02:42 2013] [debug] Worker 13221 started.
+[Wed May  1 19:02:42 2013] [info] Creating process id file "/home/jhthorsen/git/toadfarm/script/hypnotoad.pid".
+[Wed May  1 19:02:42 2013] [debug] Worker 13222 started.
+[Wed May  1 19:02:42 2013] [debug] Worker 13223 started.
+[Wed May  1 19:03:07 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:03:07 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:03:07 2013] [debug] Routing to a callback.
+[Wed May  1 19:03:07 2013] [info] Wrote payload to /tmp/toadfarm-reload-test-ipc.conf
+[Wed May  1 19:03:07 2013] [debug] 200 OK (0.001927s, 518.941/s).
+[Wed May  1 19:03:07 2013] [debug] Skip branch  (not master)
+[Wed May  1 19:03:41 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:03:41 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:03:41 2013] [debug] Routing to a callback.
+[Wed May  1 19:03:41 2013] [info] Wrote payload to /tmp/toadfarm-reload-test-ipc.conf
+[Wed May  1 19:03:41 2013] [debug] 200 OK (0.002606s, 383.730/s).
+[Wed May  1 19:03:41 2013] [info] run(t/bin/git remote update origin)
+[Wed May  1 19:03:41 2013] [info] <<< remote update origin
+[Wed May  1 19:03:41 2013] [info] run(t/bin/git log --format=%H -n1 origin/master)
+[Wed May  1 19:03:41 2013] [error] log --format=%H -n1 origin/master ne /head_commit/id
+[Wed May  1 19:05:07 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:05:07 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:05:07 2013] [debug] Routing to a callback.
+[Wed May  1 19:05:07 2013] [info] Wrote payload to /tmp/toadfarm-reload-test-ipc.conf
+[Wed May  1 19:05:07 2013] [debug] 200 OK (0.002782s, 359.454/s).
+[Wed May  1 19:05:07 2013] [info] run(t/bin/git remote update origin)
+[Wed May  1 19:05:07 2013] [info] <<< remote update origin
+[Wed May  1 19:05:07 2013] [info] run(t/bin/git log --format=%H -n1 origin/master)
+[Wed May  1 19:05:07 2013] [error] log --format=%H -n1 origin/master ne abcdefghijklmopqrstuvwz
+[Wed May  1 19:05:27 2013] [debug] Stopping worker 13222.
+[Wed May  1 19:05:27 2013] [debug] Stopping worker 13220.
+[Wed May  1 19:05:27 2013] [debug] Stopping worker 13221.
+[Wed May  1 19:05:27 2013] [debug] Stopping worker 13223.
+[Wed May  1 19:05:27 2013] [debug] Worker 13220 stopped.
+[Wed May  1 19:05:27 2013] [debug] Stopping worker 13222.
+[Wed May  1 19:05:27 2013] [debug] Stopping worker 13221.
+[Wed May  1 19:05:27 2013] [debug] Stopping worker 13223.
+[Wed May  1 19:05:27 2013] [debug] Worker 13222 stopped.
+[Wed May  1 19:05:27 2013] [debug] Worker 13223 stopped.
+[Wed May  1 19:05:27 2013] [debug] Stopping worker 13221.
+[Wed May  1 19:05:27 2013] [debug] Worker 13221 stopped.
+[Wed May  1 19:06:17 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:06:17 2013] [info] Reload watching /tmp/toadfarm-reload-test-ipc.conf every 0.1s.
+[Wed May  1 19:06:17 2013] [info] Listening at "http://*:8080".
+[Wed May  1 19:06:17 2013] [info] Manager 13568 started.
+[Wed May  1 19:06:17 2013] [debug] Worker 13569 started.
+[Wed May  1 19:06:17 2013] [info] Creating process id file "/home/jhthorsen/git/toadfarm/script/hypnotoad.pid".
+[Wed May  1 19:06:17 2013] [debug] Worker 13571 started.
+[Wed May  1 19:06:17 2013] [debug] Worker 13573 started.
+[Wed May  1 19:06:17 2013] [debug] Worker 13570 started.
+[Wed May  1 19:06:28 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:06:28 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:06:28 2013] [debug] Routing to a callback.
+[Wed May  1 19:06:28 2013] [info] Wrote payload to /tmp/toadfarm-reload-test-ipc.conf
+[Wed May  1 19:06:28 2013] [debug] 200 OK (0.003180s, 314.465/s).
+[Wed May  1 19:06:28 2013] [info] run(git remote update origin)
+[Wed May  1 19:06:28 2013] [info] <<< Fetching origin
+[Wed May  1 19:06:33 2013] [info] run(git log --format=%H -n1 origin/master)
+[Wed May  1 19:06:33 2013] [error] 5af201f4786243e4917abce5280652d025321c3e ne abcdefghijklmopqrstuvwz
+[Wed May  1 19:07:05 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:07:05 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:07:05 2013] [debug] Routing to a callback.
+[Wed May  1 19:07:05 2013] [info] Wrote payload to /tmp/toadfarm-reload-test-ipc.conf
+[Wed May  1 19:07:05 2013] [debug] 200 OK (0.002845s, 351.494/s).
+[Wed May  1 19:07:05 2013] [info] run(git remote update origin)
+[Wed May  1 19:07:05 2013] [info] <<< Fetching origin
+[Wed May  1 19:07:09 2013] [info] run(git log --format=%H -n1 origin/master)
+[Wed May  1 19:07:09 2013] [info] run(git checkout -f -B toadfarm_reload_branch origin/master)
+[Wed May  1 19:07:09 2013] [info] <<< Branch toadfarm_reload_branch set up to track remote branch master from origin.
+[Wed May  1 19:07:09 2013] [info] USR2 > 13567
+[Wed May  1 19:12:58 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:12:58 2013] [info] Reload watching /tmp/toadfarm-reload-test-ipc.conf every 0.1s.
+[Wed May  1 19:12:58 2013] [info] Listening at "http://*:8080".
+[Wed May  1 19:12:58 2013] [info] Manager 14149 started.
+[Wed May  1 19:12:58 2013] [debug] Worker 14150 started.
+[Wed May  1 19:12:58 2013] [debug] Worker 14151 started.
+[Wed May  1 19:12:58 2013] [info] Creating process id file "/home/jhthorsen/git/toadfarm/script/hypnotoad.pid".
+[Wed May  1 19:12:58 2013] [debug] Worker 14152 started.
+[Wed May  1 19:12:58 2013] [debug] Worker 14154 started.
+[Wed May  1 19:13:22 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:13:22 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:13:22 2013] [debug] Routing to a callback.
+[Wed May  1 19:13:22 2013] [info] Wrote payload to /tmp/toadfarm-reload-test-ipc.conf
+[Wed May  1 19:13:22 2013] [debug] 200 OK (0.003402s, 293.945/s).
+[Wed May  1 19:13:22 2013] [info] run(git remote update origin)
+[Wed May  1 19:13:23 2013] [info] <<< Fetching origin
+[Wed May  1 19:13:27 2013] [info] run(git log --format=%H -n1 origin/master)
+[Wed May  1 19:13:27 2013] [info] run(git checkout -f -B toadfarm_reload_branch origin/master)
+[Wed May  1 19:13:27 2013] [info] <<< Branch toadfarm_reload_branch set up to track remote branch master from origin.
+[Wed May  1 19:13:27 2013] [info] run(kill USR2 14151)
+[Wed May  1 19:19:42 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:20:04 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:20:32 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:20:32 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:20:32 2013] [debug] GET /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:20:32 2013] [debug] Routing to a callback.
+[Wed May  1 19:20:32 2013] [debug] 200 OK (0.001476s, 677.507/s).
+[Wed May  1 19:20:32 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:20:32 2013] [debug] Routing to a callback.
+[Wed May  1 19:20:32 2013] [debug] 200 OK (0.002297s, 435.350/s).
+[Wed May  1 19:20:32 2013] [warn] Could not find repo config from /repository/name
+[Wed May  1 19:20:32 2013] [debug] 200 OK (0.005635s, 177.462/s).
+[Wed May  1 19:21:26 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:21:26 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:21:26 2013] [debug] GET /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:21:26 2013] [debug] Routing to a callback.
+[Wed May  1 19:21:26 2013] [debug] 200 OK (0.001079s, 926.784/s).
+[Wed May  1 19:21:26 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:21:26 2013] [debug] Routing to a callback.
+[Wed May  1 19:21:26 2013] [debug] 200 OK (0.002724s, 367.107/s).
+[Wed May  1 19:21:26 2013] [warn] Could not find repo config from /repository/name
+[Wed May  1 19:21:26 2013] [debug] 200 OK (0.005047s, 198.138/s).
+[Wed May  1 19:22:59 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:22:59 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:22:59 2013] [debug] GET /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:22:59 2013] [debug] Routing to a callback.
+[Wed May  1 19:22:59 2013] [debug] 200 OK (0.000952s, 1050.420/s).
+[Wed May  1 19:22:59 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:22:59 2013] [debug] Routing to a callback.
+[Wed May  1 19:22:59 2013] [debug] 200 OK (0.002021s, 494.805/s).
+[Wed May  1 19:22:59 2013] [warn] Could not find repo config from /repository/name
+[Wed May  1 19:23:57 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:23:57 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:23:57 2013] [debug] GET /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:23:57 2013] [debug] Routing to a callback.
+[Wed May  1 19:23:57 2013] [debug] 200 OK (0.001048s, 954.198/s).
+[Wed May  1 19:23:57 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:23:57 2013] [debug] Routing to a callback.
+[Wed May  1 19:23:57 2013] [debug] 200 OK (0.002143s, 466.636/s).
+[Wed May  1 19:23:57 2013] [warn] Could not find repo config from /repository/name
+[Wed May  1 19:24:05 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:24:05 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:24:05 2013] [debug] GET /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:24:05 2013] [debug] Routing to a callback.
+[Wed May  1 19:24:05 2013] [debug] 200 OK (0.001077s, 928.505/s).
+[Wed May  1 19:24:05 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:24:05 2013] [debug] Routing to a callback.
+[Wed May  1 19:24:05 2013] [debug] 200 OK (0.002001s, 499.750/s).
+[Wed May  1 19:24:05 2013] [warn] Could not find repo config from /repository/name
+[Wed May  1 19:25:25 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:25:25 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:25:25 2013] [debug] GET /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:25:25 2013] [debug] Routing to a callback.
+[Wed May  1 19:25:25 2013] [debug] 200 OK (0.001066s, 938.086/s).
+[Wed May  1 19:25:25 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:25:25 2013] [debug] Routing to a callback.
+[Wed May  1 19:25:25 2013] [info] run(git remote update origin)
+[Wed May  1 19:25:25 2013] [debug] 200 OK (0.002563s, 390.168/s).
+[Wed May  1 19:25:25 2013] [info] <<< remote update origin
+[Wed May  1 19:25:25 2013] [info] run(git log --format=%H -n1 origin/master)
+[Wed May  1 19:25:25 2013] [info] run(git checkout -f -B toadfarm_reload_branch origin/master)
+[Wed May  1 19:25:25 2013] [info] <<< checkout -f -B toadfarm_reload_branch origin/master
+[Wed May  1 19:25:25 2013] [info] run(kill USR2 14949)
+[Wed May  1 19:25:42 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:25:42 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:25:42 2013] [debug] GET /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:25:42 2013] [debug] Routing to a callback.
+[Wed May  1 19:25:42 2013] [debug] 200 OK (0.000953s, 1049.318/s).
+[Wed May  1 19:25:42 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:25:42 2013] [debug] Routing to a callback.
+[Wed May  1 19:25:42 2013] [debug] 200 OK (0.001923s, 520.021/s).
+[Wed May  1 19:25:42 2013] [info] run(git remote update origin)
+[Wed May  1 19:25:42 2013] [info] <<< remote update origin
+[Wed May  1 19:25:42 2013] [info] run(git log --format=%H -n1 origin/master)
+[Wed May  1 19:25:42 2013] [info] run(git checkout -f -B toadfarm_reload_branch origin/master)
+[Wed May  1 19:25:42 2013] [info] <<< checkout -f -B toadfarm_reload_branch origin/master
+[Wed May  1 19:25:42 2013] [info] run(kill -USR2 14983)
+[Wed May  1 19:25:45 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:25:45 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:25:45 2013] [debug] GET /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:25:45 2013] [debug] Routing to a callback.
+[Wed May  1 19:25:45 2013] [debug] 200 OK (0.001285s, 778.210/s).
+[Wed May  1 19:25:45 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:25:45 2013] [debug] Routing to a callback.
+[Wed May  1 19:25:45 2013] [debug] 200 OK (0.003026s, 330.469/s).
+[Wed May  1 19:25:45 2013] [info] run(git remote update origin)
+[Wed May  1 19:25:45 2013] [info] <<< remote update origin
+[Wed May  1 19:25:45 2013] [info] run(git log --format=%H -n1 origin/master)
+[Wed May  1 19:25:45 2013] [info] run(git checkout -f -B toadfarm_reload_branch origin/master)
+[Wed May  1 19:25:45 2013] [info] <<< checkout -f -B toadfarm_reload_branch origin/master
+[Wed May  1 19:25:45 2013] [info] run(kill -USR2 15012)
+[Wed May  1 19:25:54 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:25:54 2013] [info] Starting zero downtime software upgrade.
+[Wed May  1 19:25:55 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:25:55 2013] [info] Listening at "http://*:8080".
+[Wed May  1 19:25:55 2013] [info] Manager 15094 started.
+[Wed May  1 19:25:55 2013] [debug] Worker 15115 started.
+[Wed May  1 19:25:55 2013] [debug] Worker 15116 started.
+[Wed May  1 19:25:55 2013] [info] Upgrade successful, stopping 14149.
+[Wed May  1 19:25:55 2013] [debug] Worker 15117 started.
+[Wed May  1 19:25:55 2013] [debug] Trying to stop worker 14152 gracefully.
+[Wed May  1 19:25:55 2013] [debug] Trying to stop worker 14154 gracefully.
+[Wed May  1 19:25:55 2013] [debug] Trying to stop worker 14150 gracefully.
+[Wed May  1 19:25:55 2013] [debug] Trying to stop worker 14151 gracefully.
+[Wed May  1 19:25:55 2013] [debug] Worker 15118 started.
+[Wed May  1 19:25:55 2013] [debug] Worker 14150 stopped.
+[Wed May  1 19:25:55 2013] [debug] Trying to stop worker 14152 gracefully.
+[Wed May  1 19:25:55 2013] [debug] Trying to stop worker 14154 gracefully.
+[Wed May  1 19:25:55 2013] [debug] Trying to stop worker 14151 gracefully.
+[Wed May  1 19:25:55 2013] [debug] Worker 14152 stopped.
+[Wed May  1 19:25:55 2013] [debug] Trying to stop worker 14154 gracefully.
+[Wed May  1 19:25:55 2013] [debug] Trying to stop worker 14151 gracefully.
+[Wed May  1 19:25:55 2013] [debug] Worker 14154 stopped.
+[Wed May  1 19:25:55 2013] [debug] Trying to stop worker 14151 gracefully.
+[Wed May  1 19:25:55 2013] [debug] Worker 14151 stopped.
+[Wed May  1 19:25:56 2013] [info] Creating process id file "/home/jhthorsen/git/toadfarm/script/hypnotoad.pid".
+[Wed May  1 19:26:18 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:26:18 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:26:18 2013] [debug] Routing to a callback.
+[Wed May  1 19:26:18 2013] [debug] 200 OK (0.004230s, 236.407/s).
+[Wed May  1 19:26:18 2013] [info] run(git remote update origin)
+[Wed May  1 19:26:18 2013] [info] <<< Fetching origin
+[Wed May  1 19:26:20 2013] [info] run(git log --format=%H -n1 origin/master)
+[Wed May  1 19:26:20 2013] [info] run(git checkout -f -B toadfarm_reload_branch origin/master)
+[Wed May  1 19:26:20 2013] [info] <<< Branch toadfarm_reload_branch set up to track remote branch master from origin.
+[Wed May  1 19:26:20 2013] [info] run(kill -USR2 15094)
+[Wed May  1 19:26:20 2013] [info] Starting zero downtime software upgrade.
+[Wed May  1 19:26:21 2013] [info] Zero downtime software upgrade failed.
+[Wed May  1 19:30:36 2013] [info] Starting zero downtime software upgrade.
+[Wed May  1 19:30:37 2013] [info] Zero downtime software upgrade failed.
+[Wed May  1 19:30:49 2013] [info] Starting zero downtime software upgrade.
+[Wed May  1 19:30:49 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:30:49 2013] [info] Listening at "http://*:8080".
+[Wed May  1 19:30:49 2013] [info] Manager 15409 started.
+[Wed May  1 19:30:49 2013] [debug] Worker 15437 started.
+[Wed May  1 19:30:49 2013] [debug] Worker 15438 started.
+[Wed May  1 19:30:49 2013] [debug] Worker 15439 started.
+[Wed May  1 19:30:49 2013] [info] Upgrade successful, stopping 15094.
+[Wed May  1 19:30:49 2013] [debug] Trying to stop worker 15117 gracefully.
+[Wed May  1 19:30:49 2013] [debug] Trying to stop worker 15118 gracefully.
+[Wed May  1 19:30:49 2013] [debug] Trying to stop worker 15115 gracefully.
+[Wed May  1 19:30:49 2013] [debug] Trying to stop worker 15116 gracefully.
+[Wed May  1 19:30:49 2013] [debug] Worker 15440 started.
+[Wed May  1 19:30:49 2013] [debug] Worker 15115 stopped.
+[Wed May  1 19:30:49 2013] [debug] Worker 15116 stopped.
+[Wed May  1 19:30:49 2013] [debug] Trying to stop worker 15117 gracefully.
+[Wed May  1 19:30:49 2013] [debug] Trying to stop worker 15118 gracefully.
+[Wed May  1 19:30:49 2013] [debug] Worker 15117 stopped.
+[Wed May  1 19:30:49 2013] [debug] Trying to stop worker 15118 gracefully.
+[Wed May  1 19:30:49 2013] [debug] Worker 15118 stopped.
+[Wed May  1 19:30:50 2013] [info] Creating process id file "/home/jhthorsen/git/toadfarm/script/hypnotoad.pid".
+[Wed May  1 19:32:43 2013] [debug] Stopping worker 15437.
+[Wed May  1 19:32:43 2013] [debug] Stopping worker 15439.
+[Wed May  1 19:32:43 2013] [debug] Stopping worker 15438.
+[Wed May  1 19:32:43 2013] [debug] Stopping worker 15440.
+[Wed May  1 19:32:43 2013] [debug] Worker 15439 stopped.
+[Wed May  1 19:32:43 2013] [debug] Stopping worker 15437.
+[Wed May  1 19:32:43 2013] [debug] Worker 15438 stopped.
+[Wed May  1 19:32:43 2013] [debug] Stopping worker 15440.
+[Wed May  1 19:32:43 2013] [debug] Worker 15440 stopped.
+[Wed May  1 19:32:43 2013] [debug] Worker 15437 stopped.
+[Wed May  1 19:41:53 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:42:23 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:42:23 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:42:23 2013] [debug] GET /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:42:23 2013] [debug] Routing to a callback.
+[Wed May  1 19:42:23 2013] [debug] 200 OK (0.000922s, 1084.599/s).
+[Wed May  1 19:42:23 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:42:23 2013] [debug] Routing to a callback.
+[Wed May  1 19:42:23 2013] [info] run(git remote update origin)
+[Wed May  1 19:42:23 2013] [debug] 200 OK (0.002487s, 402.091/s).
+[Wed May  1 19:42:23 2013] [info] <<< remote update origin
+[Wed May  1 19:42:23 2013] [info] run(git log --format=%H -n1 origin/master)
+[Wed May  1 19:42:23 2013] [info] run(git checkout -f -B toadfarm_reload_branch origin/master)
+[Wed May  1 19:42:23 2013] [info] <<< checkout -f -B toadfarm_reload_branch origin/master
+[Wed May  1 19:42:23 2013] [info] run(kill -USR2 16333)
+[Wed May  1 19:47:37 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:47:37 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:47:37 2013] [debug] GET /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:47:37 2013] [debug] Routing to a callback.
+[Wed May  1 19:47:37 2013] [debug] 200 OK (0.001071s, 933.707/s).
+[Wed May  1 19:47:37 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:47:37 2013] [debug] Routing to a callback.
+[Wed May  1 19:47:37 2013] [info] run(git remote update origin)
+[Wed May  1 19:47:37 2013] [debug] 200 OK (0.002404s, 415.973/s).
+[Wed May  1 19:47:37 2013] [info] <<< remote update origin
+[Wed May  1 19:47:37 2013] [info] run(git log --format=%H -n1 origin/master)
+[Wed May  1 19:47:37 2013] [info] run(git checkout -f -B toadfarm_reload_branch origin/master)
+[Wed May  1 19:47:38 2013] [info] <<< checkout -f -B toadfarm_reload_branch origin/master
+[Wed May  1 19:47:38 2013] [info] run(kill -USR2 16703)
+[Wed May  1 19:48:40 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/basic.conf".
+[Wed May  1 19:48:40 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:48:40 2013] [debug] GET / (Mojolicious (Perl)).
+[Wed May  1 19:48:40 2013] [debug] Template "not_found.development.html.ep" not found.
+[Wed May  1 19:48:40 2013] [debug] Template "not_found.html.ep" not found.
+[Wed May  1 19:48:40 2013] [debug] Rendering inline template.
+[Wed May  1 19:48:40 2013] [debug] Rendering inline template.
+[Wed May  1 19:48:40 2013] [debug] 404 Not Found (0.021705s, 46.072/s).
+[Wed May  1 19:48:40 2013] [debug] GET / (Mojolicious (Perl)).
+[Wed May  1 19:48:40 2013] [debug] Routing to application "Mojolicious::Lite".
+[Wed May  1 19:48:40 2013] [debug] GET / (Mojolicious (Perl)).
+[Wed May  1 19:48:40 2013] [debug] Routing to application "Mojolicious::Lite".
+[Wed May  1 19:48:40 2013] [debug] GET /info (Mojolicious (Perl)).
+[Wed May  1 19:48:40 2013] [debug] Routing to a callback.
+[Wed May  1 19:48:40 2013] [debug] 200 OK (0.000978s, 1022.495/s).
+[Wed May  1 19:48:40 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:48:40 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:48:40 2013] [debug] GET /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:48:40 2013] [debug] Routing to a callback.
+[Wed May  1 19:48:40 2013] [debug] 200 OK (0.000975s, 1025.641/s).
+[Wed May  1 19:48:40 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:48:40 2013] [debug] Routing to a callback.
+[Wed May  1 19:48:40 2013] [info] run(git remote update origin)
+[Wed May  1 19:48:40 2013] [debug] 200 OK (0.002430s, 411.523/s).
+[Wed May  1 19:48:40 2013] [info] <<< remote update origin
+[Wed May  1 19:48:40 2013] [info] run(git log --format=%H -n1 origin/master)
+[Wed May  1 19:48:40 2013] [info] run(git checkout -f -B toadfarm_reload_branch origin/master)
+[Wed May  1 19:48:40 2013] [info] <<< checkout -f -B toadfarm_reload_branch origin/master
+[Wed May  1 19:48:40 2013] [info] run(kill -USR2 16836)
+[Wed May  1 19:48:45 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/basic.conf".
+[Wed May  1 19:48:45 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:48:45 2013] [debug] GET / (Mojolicious (Perl)).
+[Wed May  1 19:48:45 2013] [debug] Template "not_found.development.html.ep" not found.
+[Wed May  1 19:48:45 2013] [debug] Template "not_found.html.ep" not found.
+[Wed May  1 19:48:45 2013] [debug] Rendering inline template.
+[Wed May  1 19:48:45 2013] [debug] Rendering inline template.
+[Wed May  1 19:48:45 2013] [debug] 404 Not Found (0.023007s, 43.465/s).
+[Wed May  1 19:48:45 2013] [debug] GET / (Mojolicious (Perl)).
+[Wed May  1 19:48:45 2013] [debug] Routing to application "Mojolicious::Lite".
+[Wed May  1 19:48:45 2013] [debug] GET / (Mojolicious (Perl)).
+[Wed May  1 19:48:45 2013] [debug] Routing to application "Mojolicious::Lite".
+[Wed May  1 19:48:45 2013] [debug] GET /info (Mojolicious (Perl)).
+[Wed May  1 19:48:45 2013] [debug] Routing to a callback.
+[Wed May  1 19:48:45 2013] [debug] 200 OK (0.000803s, 1245.330/s).
+[Wed May  1 19:48:45 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:48:45 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:48:45 2013] [debug] GET /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:48:45 2013] [debug] Routing to a callback.
+[Wed May  1 19:48:45 2013] [debug] 200 OK (0.001059s, 944.287/s).
+[Wed May  1 19:48:45 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:48:45 2013] [debug] Routing to a callback.
+[Wed May  1 19:48:45 2013] [info] run(git remote update origin)
+[Wed May  1 19:48:45 2013] [debug] 200 OK (0.002434s, 410.846/s).
+[Wed May  1 19:48:45 2013] [info] <<< remote update origin
+[Wed May  1 19:48:45 2013] [info] run(git log --format=%H -n1 origin/master)
+[Wed May  1 19:48:45 2013] [info] run(git checkout -f -B toadfarm_reload_branch origin/master)
+[Wed May  1 19:48:45 2013] [info] <<< checkout -f -B toadfarm_reload_branch origin/master
+[Wed May  1 19:48:45 2013] [info] run(kill -USR2 16871)
+[Wed May  1 19:51:50 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/basic.conf".
+[Wed May  1 19:51:50 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:51:50 2013] [debug] GET / (Mojolicious (Perl)).
+[Wed May  1 19:51:50 2013] [debug] Template "not_found.development.html.ep" not found.
+[Wed May  1 19:51:50 2013] [debug] Template "not_found.html.ep" not found.
+[Wed May  1 19:51:50 2013] [debug] Rendering inline template.
+[Wed May  1 19:51:50 2013] [debug] Rendering inline template.
+[Wed May  1 19:51:50 2013] [debug] 404 Not Found (0.022892s, 43.683/s).
+[Wed May  1 19:51:50 2013] [debug] GET / (Mojolicious (Perl)).
+[Wed May  1 19:51:50 2013] [debug] Routing to application "Mojolicious::Lite".
+[Wed May  1 19:51:50 2013] [debug] GET / (Mojolicious (Perl)).
+[Wed May  1 19:51:50 2013] [debug] Routing to application "Mojolicious::Lite".
+[Wed May  1 19:51:50 2013] [debug] GET /info (Mojolicious (Perl)).
+[Wed May  1 19:51:50 2013] [debug] Routing to a callback.
+[Wed May  1 19:51:50 2013] [debug] 200 OK (0.000795s, 1257.862/s).
+[Wed May  1 19:51:51 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:51:51 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:51:51 2013] [debug] GET /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:51:51 2013] [debug] Routing to a callback.
+[Wed May  1 19:51:51 2013] [debug] 200 OK (0.000965s, 1036.269/s).
+[Wed May  1 19:51:51 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:51:51 2013] [debug] Routing to a callback.
+[Wed May  1 19:51:51 2013] [info] run(git remote update origin)
+[Wed May  1 19:51:51 2013] [debug] 200 OK (0.002373s, 421.408/s).
+[Wed May  1 19:51:51 2013] [info] <<< remote update origin
+[Wed May  1 19:51:51 2013] [info] run(git log --format=%H -n1 origin/master)
+[Wed May  1 19:51:51 2013] [info] run(git checkout -f -B toadfarm_reload_branch origin/master)
+[Wed May  1 19:51:51 2013] [info] <<< checkout -f -B toadfarm_reload_branch origin/master
+[Wed May  1 19:51:51 2013] [info] run(kill -USR2 17285)
+[Wed May  1 19:55:17 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:55:17 2013] [info] Listening at "http://*:8080".
+[Wed May  1 19:55:17 2013] [info] Manager 17420 started.
+[Wed May  1 19:55:17 2013] [debug] Worker 17421 started.
+[Wed May  1 19:55:17 2013] [debug] Worker 17422 started.
+[Wed May  1 19:55:17 2013] [debug] Worker 17423 started.
+[Wed May  1 19:55:17 2013] [info] Creating process id file "/home/jhthorsen/git/toadfarm/script/hypnotoad.pid".
+[Wed May  1 19:55:17 2013] [debug] Worker 17426 started.
+[Wed May  1 19:55:25 2013] [debug] Your secret passphrase needs to be changed!!!
+[Wed May  1 19:55:25 2013] [debug] POST /bad-path (Mojolicious (Perl)).
+[Wed May  1 19:55:25 2013] [debug] Routing to a callback.
+[Wed May  1 19:55:25 2013] [info] run(git remote update origin)
+[Wed May  1 19:55:25 2013] [debug] 200 OK (0.005009s, 199.641/s).
+[Wed May  1 19:55:25 2013] [info] <<< Fetching origin
+[Wed May  1 19:55:28 2013] [info] run(git log --format=%H -n1 origin/master)
+[Wed May  1 19:55:28 2013] [info] run(git checkout -f -B toadfarm_reload_branch origin/master)
+[Wed May  1 19:55:28 2013] [info] <<< Branch toadfarm_reload_branch set up to track remote branch master from origin.
+[Wed May  1 19:55:28 2013] [info] run(kill -USR2 17420)
+[Wed May  1 19:55:28 2013] [info] Starting zero downtime software upgrade.
+[Wed May  1 19:55:29 2013] [debug] Reading config file "/home/jhthorsen/git/toadfarm/t/reload.conf".
+[Wed May  1 19:55:29 2013] [info] Listening at "http://*:8080".
+[Wed May  1 19:55:29 2013] [info] Manager 17500 started.
+[Wed May  1 19:55:29 2013] [debug] Worker 17501 started.
+[Wed May  1 19:55:29 2013] [debug] Worker 17502 started.
+[Wed May  1 19:55:29 2013] [debug] Worker 17503 started.
+[Wed May  1 19:55:29 2013] [info] Upgrade successful, stopping 17420.
+[Wed May  1 19:55:29 2013] [debug] Trying to stop worker 17426 gracefully.
+[Wed May  1 19:55:29 2013] [debug] Trying to stop worker 17423 gracefully.
+[Wed May  1 19:55:29 2013] [debug] Trying to stop worker 17421 gracefully.
+[Wed May  1 19:55:29 2013] [debug] Trying to stop worker 17422 gracefully.
+[Wed May  1 19:55:29 2013] [debug] Worker 17504 started.
+[Wed May  1 19:55:29 2013] [debug] Worker 17426 stopped.
+[Wed May  1 19:55:29 2013] [debug] Trying to stop worker 17423 gracefully.
+[Wed May  1 19:55:29 2013] [debug] Trying to stop worker 17421 gracefully.
+[Wed May  1 19:55:29 2013] [debug] Worker 17421 stopped.
+[Wed May  1 19:55:29 2013] [debug] Trying to stop worker 17422 gracefully.
+[Wed May  1 19:55:29 2013] [debug] Worker 17422 stopped.
+[Wed May  1 19:55:29 2013] [debug] Trying to stop worker 17423 gracefully.
+[Wed May  1 19:55:29 2013] [debug] Worker 17423 stopped.
+[Wed May  1 19:55:30 2013] [info] Creating process id file "/home/jhthorsen/git/toadfarm/script/hypnotoad.pid".
+[Wed May  1 19:56:02 2013] [debug] Stopping worker 17503.
+[Wed May  1 19:56:02 2013] [debug] Stopping worker 17502.
+[Wed May  1 19:56:02 2013] [debug] Stopping worker 17504.
+[Wed May  1 19:56:02 2013] [debug] Stopping worker 17501.
+[Wed May  1 19:56:02 2013] [debug] Worker 17502 stopped.
+[Wed May  1 19:56:02 2013] [debug] Stopping worker 17503.
+[Wed May  1 19:56:02 2013] [debug] Stopping worker 17504.
+[Wed May  1 19:56:02 2013] [debug] Worker 17503 stopped.
+[Wed May  1 19:56:02 2013] [debug] Worker 17504 stopped.
+[Wed May  1 19:56:02 2013] [debug] Worker 17501 stopped.
