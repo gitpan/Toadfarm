@@ -6,7 +6,7 @@ Toadfarm - One Mojolicious app to rule them all
 
 =head1 VERSION
 
-0.06
+0.07
 
 =head1 SYNOPSIS
 
@@ -72,12 +72,33 @@ Additional config params.
       workers => 12,
       # ...
     },
+    paths => {
+      renderer => [ '/my/custom/template/path' ],
+      static => [ '/my/custom/static/path' ],
+    },
     plugins => [
       MojoPlugin => CONFIG,
     ],
   }
 
+=over 4
+
+=item * log
+
+Used to set up where L<Toadfarm> should log to. It is also possible to set
+"combined" to true if you want all the other apps to log to the same file.
+
+=item * hypnotoad
+
 See L<Mojo::Server::Hypnotoad/SETTINGS> for more "hypnotoad" settings.
+
+=item * paths
+
+Set this to enable custom templates and public files for this application.
+This is useful if you want your own error templates or serve other assets from
+L<Toadfarm>.
+
+=item * plugins
 
 "plugins" can be used to load plugins into L<Toadfarm>. The plugins are loaded
 after the "apps" are loaded. They will receive the C<CONFIG> as the third
@@ -89,6 +110,8 @@ argument:
   }
 
 See also: L<Toadfarm::Plugin::Reload/SYNOPSIS>.
+
+=back
 
 =head1 EXAMPLE SETUP
 
@@ -107,7 +130,7 @@ L<Toadfarm::Plugin::Reload>.
 use Mojo::Base 'Mojolicious';
 use Mojo::Util 'class_to_path';
 
-our $VERSION = eval '0.06';
+our $VERSION = eval '0.07';
 
 =head1 METHODS
 
@@ -126,6 +149,11 @@ sub startup {
     $log->path($config->{log}{file});
     $log->level($config->{log}{level} || 'info');
     $self->log($log);
+  }
+
+  for my $type (qw/ renderer static /) {
+    my $paths = $config->{paths}{$type} or next;
+    $self->$type->paths($paths);
   }
 
   $self->_start_apps(@{ $config->{apps} }) if $config->{apps};
