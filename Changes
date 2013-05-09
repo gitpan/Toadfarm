@@ -1,5 +1,9 @@
 Revision history for Toadfarm
 
+0.08     Thu May  9 12:30:49 2013
+       * Remove VERSION from Makefile.PL
+       * Fix mouting app without conditions
+
 0.07     Sun May  5 16:26:13 2013
        * Improved status page for reload plugin
        * Add support for custom error pages and assets

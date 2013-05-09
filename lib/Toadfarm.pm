@@ -6,7 +6,7 @@ Toadfarm - One Mojolicious app to rule them all
 
 =head1 VERSION
 
-0.07
+0.08
 
 =head1 SYNOPSIS
 
@@ -130,7 +130,7 @@ L<Toadfarm::Plugin::Reload>.
 use Mojo::Base 'Mojolicious';
 use Mojo::Util 'class_to_path';
 
-our $VERSION = eval '0.07';
+our $VERSION = '0.08';
 
 =head1 METHODS
 
@@ -158,6 +158,12 @@ sub startup {
 
   $self->_start_apps(@{ $config->{apps} }) if $config->{apps};
   $self->_start_plugins(@{ $config->{plugins} }) if $config->{plugins};
+
+  # need to add the root app afterwards
+  if(my $app = delete $self->{root_app}) {
+    $self->log->info("Mounting $app->[0] without condition");
+    $self->routes->route('/')->detour(app => $app->[1]);
+  }
 }
 
 sub _start_apps {
@@ -171,7 +177,7 @@ sub _start_apps {
 
   while(@_) {
     my($path, $rules) = (shift @_, shift @_);
-    my($app, $r, $request_base, @over);
+    my($app, $request_base, @over);
 
     delete local $ENV{MOJO_CONFIG};
     $path = class_to_path $path unless -e $path;
@@ -184,18 +190,16 @@ sub _start_apps {
       push @over, "return 0 unless +(\$h->header('$name') // '') eq '$value';\n";
     }
 
-    $r = $routes->route('/')->detour(app => $app);
-
     if(@over) {
       $app->log->info("Mounting $path with conditions");
       unshift @over, "sub { my \$h = \$_[1]->req->headers;\n";
       push @over, "\$_[1]->req->url->base(Mojo::URL->new('$request_base'));" if $request_base;
       push @over, "return 1; }";
       $routes->add_condition("toadfarm_condition_$n", => eval "@over" || die "@over: $@");
-      $r->over("toadfarm_condition_$n");
+      $routes->route('/')->detour(app => $app)->over("toadfarm_condition_$n");
     }
     else {
-      $app->log->info("Mounting $path without condition");
+      $self->{root_app} = [ $path => $app ];
     }
 
     $n++;
