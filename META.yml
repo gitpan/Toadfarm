@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Toadfarm
-version:            0.09
+version:            0.10
 abstract:           ~
 author:
     - Jan Henning Thorsen <jhthorsen@cpan.org>
