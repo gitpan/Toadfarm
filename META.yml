@@ -1,22 +1,22 @@
---- #YAML:1.0
-name:               Toadfarm
-version:            0.10
-abstract:           ~
+---
+abstract: unknown
 author:
-    - Jan Henning Thorsen <jhthorsen@cpan.org>
-license:            unknown
-distribution_type:  module
-configure_requires:
-    ExtUtils::MakeMaker:  0
+  - 'Jan Henning Thorsen <jhthorsen@cpan.org>'
 build_requires:
-    ExtUtils::MakeMaker:  0
-requires:
-    Mojolicious:  3.91
-no_index:
-    directory:
-        - t
-        - inc
-generated_by:       ExtUtils::MakeMaker version 6.57_05
+  ExtUtils::MakeMaker: 0
+configure_requires:
+  ExtUtils::MakeMaker: 0
+dynamic_config: 1
+generated_by: 'ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.112621'
+license: unknown
 meta-spec:
-    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
-    version:  1.4
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Toadfarm
+no_index:
+  directory:
+    - t
+    - inc
+requires:
+  Mojolicious: 3.91
+version: 0.1001
