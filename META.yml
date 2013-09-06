@@ -1,14 +1,14 @@
 ---
-abstract: unknown
+abstract: 'One Mojolicious app to rule them all'
 author:
   - 'Jan Henning Thorsen <jhthorsen@cpan.org>'
 build_requires:
-  ExtUtils::MakeMaker: 0
+  Test::More: 0.90
 configure_requires:
   ExtUtils::MakeMaker: 0
 dynamic_config: 1
 generated_by: 'ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.131560'
-license: unknown
+license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
@@ -18,5 +18,9 @@ no_index:
     - t
     - inc
 requires:
-  Mojolicious: 3.91
-version: 0.12
+  Mojolicious: 4.30
+resources:
+  bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Toadfarm
+  homepage: https://metacpan.org/release/Toadfarm
+  license: http://dev.perl.org/licenses/
+version: 0.13
