@@ -23,4 +23,5 @@ resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Toadfarm
   homepage: https://metacpan.org/release/Toadfarm
   license: http://dev.perl.org/licenses/
-version: 0.13
+  repository: https://github.com/jhthorsen/toadfarm
+version: 0.1301
