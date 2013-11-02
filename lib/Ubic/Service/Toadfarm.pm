@@ -121,17 +121,18 @@ response is not important, the important thing is that the server responds.
 sub status_impl {
   my $self = shift;
   my $listen = $self->{hypnotoad}{listen}[0];
+  my $resource = $self->{hypnotoad}{status_resource} || "/ubic-status";
   my %args = ( connect_timeout => 5, request_timeout => 20 );
   my $tx;
 
   require Mojo::UserAgent;
 
   $listen =~ s!\*!localhost!;
-  $tx = Mojo::UserAgent->new(%args)->head("$listen/ubic-status");
+  $tx = Mojo::UserAgent->new(%args)->head($listen .$resource);
   warn $tx->res->code // 'No HTTP code', "\n" if DEBUG;
 
-  if($tx->res->code) {
-    return result 'running';
+  if(my $code = $tx->res->code) {
+    return result "running", "status $code";
   }
   else {
     return result 'not running';
