@@ -1,7 +1,7 @@
 use Test::More;
 
 plan skip_all => 'Ubic is not installed' unless eval 'use Ubic; 1';
-plan skip_all => "PATH is not set" unless $ENV{PATH};
+plan skip_all => 'Need to set TEST_UBIC=1' unless $ENV{TEST_UBIC};
 
 my(@system, @kill);
 
@@ -72,7 +72,7 @@ my $service = Ubic::Service::Toadfarm->new(
     $tx;
   };
 
-  is $service->status_impl, 'running (status 42)', 'toadfarm is running';
+  like $service->status_impl, qr/running \(pid \d+, status 42\)/, 'toadfarm is running';
   like $url, qr{/status123$}, 'correct status url';
 }
 
