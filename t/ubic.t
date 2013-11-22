@@ -37,7 +37,7 @@ my $service = Ubic::Service::Toadfarm->new(
               );
 
 {
-  is $ENV{TEST123}, 123, 'environment set';
+  is $ENV{TEST123}, undef, 'environment localized';
   is $service->{stdout}, $log_file, 'stdout set';
   is $service->{stderr}, $log_file, 'stderr set';
   is $service->{ubic_log}, $log_file, 'ubic_log set';
@@ -46,11 +46,11 @@ my $service = Ubic::Service::Toadfarm->new(
 {
   mkdir 't/ubic';
   mkdir 't/ubic/tmp';
-  unlink 't/ubic/tmp/toadfarm-test123.conf';
+  unlink 't/ubic/tmp/test123.conf';
   $service->{name} = 'test123';
   $service->start_impl;
   like "@system", qr{hypnotoad\s*script/toadfarm}, 'system hypnotoad toadfarm';
-  my $config = do 't/ubic/tmp/toadfarm-test123.conf';
+  my $config = do 't/ubic/tmp/test123.conf';
   is_deeply(
     $config,
     {
@@ -60,7 +60,7 @@ my $service = Ubic::Service::Toadfarm->new(
       },
       hypnotoad => {
         listen => ['http://*:1345'],
-        pid_file => 't/ubic/tmp/toadfarm-test123.pid',
+        pid_file => 't/ubic/tmp/test123.pid',
         status_resource => '/status123',
       },
       log => { file => 't/ubic/toadfarm.log' },

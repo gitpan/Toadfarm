@@ -50,9 +50,12 @@ It is possible to use this module as a generic C<hypnotoad> starter, instead
 of L<Ubic::Service::Hypnotoad>, by setting the "HYPNOTOAD_APP" environment
 variable:
 
-  $ENV{HYPNOTOAD_APP} = '/path/to/my-mojo-app';
   use Ubic::Service::Toadfarm;
-  Ubic::Service::Toadfarm->new(...);
+  Ubic::Service::Toadfarm->new(
+    env => {
+      HYPNOTOAD_APP => '/path/to/my-mojo-app',
+    },
+  );
 
 =cut
 
@@ -82,16 +85,8 @@ sub new {
   my $class = shift;
   my $args = @_ ? @_ > 1 ? {@_} : {%{$_[0]}} : {};
   my $self = bless $args, $class;
-  my $env = $args->{env} || {};
 
   ref $self->{hypnotoad}{listen} eq 'ARRAY' or die 'Invalid/missing hypnotoad => listen';
-  $self->{stderr} ||= $self->{log}{file} or die "Missing log => file";
-  $self->{stdout} ||= $self->{log}{file};
-  $self->{ubic_log} ||= $self->{log}{file};
-
-  while(my($name, $value) = each %$env) {
-    $ENV{$name} = $value;
-  }
 
   warn Data::Dumper::Dumper($self) if DEBUG == 2;
   return $self;
@@ -112,6 +107,7 @@ sub start_impl {
   my $hypnotoad = which 'hypnotoad';
 
   $self->_write_mojo_config;
+  local $ENV = $self->_env;
   warn "MOJO_CONFIG=$ENV{MOJO_CONFIG} system $hypnotoad $ENV{HYPNOTOAD_APP}\n" if DEBUG;
   system $hypnotoad => $ENV{HYPNOTOAD_APP};
 }
@@ -129,6 +125,8 @@ sub status_impl {
   my $pid = $self->_read_pid;
   my $resource = $self->{hypnotoad}{status_resource} || "/ubic-status";
   my($tx, %args);
+
+  local $ENV = $self->_env;
 
   # no need to check if process is not running
   if(!$pid or !kill 0, $pid) {
@@ -186,16 +184,22 @@ sub reload {
   return result 'reloaded';
 }
 
-sub _path_to_mojo_config {
-  $ENV{MOJO_CONFIG} = catfile(
-    Ubic::Settings->data_dir,
-    'tmp',
-    'toadfarm-' .$_[0]->name .'.conf'
+sub _env {
+  my $self = shift;
+
+  return(
+    %ENV,
+    %{ $self->{env} || {} },
+    MOJO_CONFIG => $self->_path_to_mojo_config,
   );
 }
 
+sub _path_to_mojo_config {
+  catfile(Ubic::Settings->data_dir, 'tmp', $_[0]->full_name .'.conf');
+}
+
 sub _path_to_pid_file {
-  catfile(Ubic::Settings->data_dir, 'tmp', 'toadfarm-' .$_[0]->name .'.pid');
+  catfile(Ubic::Settings->data_dir, 'tmp', $_[0]->full_name .'.pid');
 }
 
 sub _read_pid {
@@ -216,7 +220,6 @@ sub _write_mojo_config {
   my %config = %$self;
   my $dumper = Data::Dumper->new([\%config]);
 
-  delete $config{$_} for qw( stderr stdout ubic_log );
   $config{hypnotoad}{pid_file} ||= $self->_path_to_pid_file;
 
   open my $CONFIG, '>', $file or die "Could not write $file: $!";
