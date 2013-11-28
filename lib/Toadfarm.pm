@@ -6,7 +6,7 @@ Toadfarm - One Mojolicious app to rule them all
 
 =head1 VERSION
 
-0.2602
+0.27
 
 =head1 SYNOPSIS
 
@@ -135,7 +135,7 @@ See also: L<Toadfarm::Plugin::Reload/SYNOPSIS>.
 
 =head1 EXAMPLE SETUP
 
-Look at L<https://github.com/jhthorsen/toadfarm/tree/etc/> for example
+Look at L<https://github.com/jhthorsen/toadfarm/tree/master/etc> for example
 resources which show how to start L<Toadfarm> on ubuntu. In addition, you can
 forward all traffic to the server using the "iptables" rule below:
 
@@ -149,8 +149,9 @@ L<Toadfarm::Plugin::Reload>.
 
 use Mojo::Base 'Mojolicious';
 use Mojo::Util 'class_to_path';
+use File::Which;
 
-our $VERSION = '0.2602';
+our $VERSION = '0.27';
 
 =head1 METHODS
 
@@ -198,13 +199,20 @@ sub _start_apps {
   }
 
   while(@_) {
-    my($path, $rules) = (shift @_, shift @_);
-    my($app, $request_base, @over);
+    my($name, $rules) = (shift @_, shift @_);
+    my $server = Mojo::Server->new;
+    my $path = $name;
+    my($app, $request_base, @over, @error);
 
     delete local $ENV{MOJO_CONFIG};
-    $path = class_to_path $path unless -e $path;
-    $app = Mojo::Server->new->load_app($path);
 
+    $path = File::Which::which($path) || class_to_path($path) unless -r $path;
+    $app ||= eval { $server->load_app($path) } or push @error, $@;
+    $app ||= eval { $server->build_app($name) } or push @error, $@;
+
+    if(!$app) {
+      die join "\n", @error;
+    }
     if($config->{log}{combined}) {
       $app->log($self->log);
     }
