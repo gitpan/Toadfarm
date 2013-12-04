@@ -5,6 +5,7 @@ use Test::More;
 $ENV{TOADFARM_SILENT} = 1;
 $ENV{HOME} = 't';
 
+plan skip_all => 'Cannot run on Win32' if $^O =~ /win/i;
 plan skip_all => 'Cannot read t/.toadfarm/script.conf' unless -r 't/.toadfarm/script.conf';
 
 my(@exec, $ret);
@@ -60,6 +61,15 @@ my(@exec, $ret);
   do 'script/toadfarm';
   like $@, qr{exit}, 'exit start()';
   is_deeply \@exec, [], 'already running';
+}
+
+{
+  delete $ENV{MOJO_CONFIG};
+  local $ENV{PATH} = '/bin:script:/foo';
+  local @ARGV = qw( -a script/myapp.pl );
+  do 'script/toadfarm';
+  is_deeply \@exec, [ hypnotoad => 'script/myapp.pl' ], 'hypnotoad with just -a';
+  like $ENV{MOJO_CONFIG}, qr{/t/\.toadfarm/myapp\.pl\.conf}, 'MOJO_CONFIG from -a';
 }
 
 done_testing;
