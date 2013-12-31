@@ -33,7 +33,7 @@
       "runtime" : {
          "requires" : {
             "File::Which" : "1.00",
-            "Mojolicious" : "4.30"
+            "Mojolicious" : "4.63"
          }
       }
    },
@@ -50,5 +50,5 @@
          "url" : "https://github.com/jhthorsen/toadfarm"
       }
    },
-   "version" : "0.30"
+   "version" : "0.40"
 }

@@ -19,10 +19,10 @@ no_index:
     - inc
 requires:
   File::Which: 1.00
-  Mojolicious: 4.30
+  Mojolicious: 4.63
 resources:
   bugtracker: https://github.com/jhthorsen/toadfarm/issues
   homepage: https://metacpan.org/release/Toadfarm
   license: http://dev.perl.org/licenses/
   repository: https://github.com/jhthorsen/toadfarm
-version: 0.30
+version: 0.40
