@@ -2,140 +2,38 @@ NAME
     Toadfarm - One Mojolicious app to rule them all
 
 VERSION
-    0.41
-
-SYNOPSIS
-  Production
-    You can start the application by running:
-
-      $ toadfarm myconfig.conf;
-
-    "myconfig.conf" should contain a list with the application you want to
-    run and a set of HTTP headers to act on. Example:
-
-      {
-        apps => [
-          'My::App' => {
-            'X-Request-Base' => 'http://mydomain.com/whatever',
-            'config' => { app_config => 123 },
-          },
-          '/path/to/my-app' => {
-            'Host' => 'mydomain.com',
-          },
-        ],
-      }
-
-    The config above will run "My::App" when the "X-Request-Base" header is
-    set to "http://mydomain.com/whatever".
-
-    Or it will pass the request on to "/path/to/my-app" if the "Host" header
-    is set to "mydomain.com".
-
-    The apps are processed in the order they are defined. This means that
-    the first app that match will be executed.
-
-  Application config
-    The application will load the config as you would expect, but it is also
-    possible to override the app config from the toadfarm config. This is
-    especially useful when starting an app installed from cpan:
-
-      apps => {
-        # https://metacpan.org/module/App::mojopaste
-        '/usr/local/bin/mojopaste' => {
-          Host => 'p.thorsen.pm',
-          config => {
-            paste_dir => '/some/other/location
-          },
-        },
-      },
-
-    NOTE! This config will be override the default application config.
-
-  Debug
-    It is possible to start the server in foreground as well:
-
-      $ MOJO_CONFIG=myconfig.conf toadfarm prefork
-      $ MOJO_CONFIG=myconfig.conf toadfarm daemon
-
-    See other options by running:
-
-      $ toadfarm -h
+    0.42
 
 DESCRIPTION
-    This application can be used to load other Mojolicious apps inside one
-    app. This could be useful if you want to save memory or instances on
-    dotcloud or heroku.
+    Toadfarm is wrapper around hypnotoad that allow you to mount many
+    Mojolicious applications inside one hypnotoad server.
 
-CONFIG FILE
-    Additional config params.
+    The Mojolicious::Plugin::Mount plugin is useful if your applications are
+    hard coupled, while Toadfarm provide functionality to route requests to
+    a standalone application based on HTTP headers instead. This is
+    functionality that you expect from a reverse proxy, such as Nginx.
 
-      {
-        apps => [...], # See SYNOPSIS
-        secrets => [qw( super duper unique string )], # See Mojolicious->secrets()
-        log => {
-          file => '/path/to/log/file.log',
-          level => 'debug', # debug, info, warn, ...
-          combined => 1, # true to make all applications log to the same file
-        },
-        hypnotoad => {
-          listen => ['http://*:1234'],
-          workers => 12,
-          # ...
-        },
-        paths => {
-          renderer => [ '/my/custom/template/path' ],
-          static => [ '/my/custom/static/path' ],
-        },
-        plugins => [
-          MojoPlugin => CONFIG,
-        ],
-      }
+DOCUMENTATION INDEX
+    *   Toadfarm::Manual::Intro - Introduction.
 
-    *   log
+    *   Toadfarm::Manual::Config - Config file format.
 
-        Used to set up where Toadfarm should log to. It is also possible to
-        set "combined" to true if you want all the other apps to log to the
-        same file.
+    *   Toadfarm::Manual::RunningToadfarm - Command line options.
 
-    *   hypnotoad
+    *   Toadfarm::Manual::BehindReverseProxy - Toadfarm behind nginx.
 
-        See "SETTINGS" in Mojo::Server::Hypnotoad for more "hypnotoad"
-        settings.
-
-    *   paths
-
-        Set this to enable custom templates and public files for this
-        application. This is useful if you want your own error templates or
-        serve other assets from Toadfarm.
-
-    *   plugins
-
-        "plugins" can be used to load plugins into Toadfarm. The plugins are
-        loaded after the "apps" are loaded. They will receive the "CONFIG"
-        as the third argument:
-
-          sub register {
-            my($self, $app, CONFIG) = @_;
-            # ...
-          }
-
-        See also: "SYNOPSIS" in Toadfarm::Plugin::Reload.
-
-EXAMPLE SETUP
-    Look at <https://github.com/jhthorsen/toadfarm/tree/master/etc> for
-    example resources which show how to start Toadfarm on ubuntu. In
-    addition, you can forward all traffic to the server using the "iptables"
-    rule below:
-
-      $ iptables -A PREROUTING -i eth0 -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8080
+    *   Toadfarm::Manual::VirtualHost - Virtual host setup.
 
 PLUGINS
-    Toadfarm::Plugin::Reload.
+    *   Toadfarm::Plugin::AccessLog
 
-METHODS
-  startup
-    This method will read the "MOJO_CONFIG" and mount the applications
-    specified.
+    *   Toadfarm::Plugin::Reload
+
+COPYRIGHT AND LICENSE
+    Copyright (C) 2014, Jan Henning Thorsen
+
+    This program is free software, you can redistribute it and/or modify it
+    under the terms of the Artistic License version 2.0.
 
 AUTHOR
     Jan Henning Thorsen - "jhthorsen@cpan.org"

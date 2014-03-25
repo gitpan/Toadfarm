@@ -1,5 +1,11 @@
 Revision history for Toadfarm
 
+0.42     Tue Mar 25 16:11:39 2014
+       * Improved documentation
+       * Add support for filtering on remote_address
+       * Add support for filtering on remote_port
+       * Add support for custom mount point
+
 0.41     Wed Mar 19 17:58:41 2014
        * Add support for header regexp matching
        * Fix not let MOJO_CONFIG be visible in parent processes

@@ -1,0 +1,75 @@
+=head1 NAME
+
+Toadfarm::Manual::Intro - Introduction to Toadfarm
+
+=head1 DESCRIPTION
+
+This manual aims to give an introduction to how to set up C<toadfarm>.
+
+=head2 Config
+
+First you need to create a configuration file to describe when an application
+will be triggered. The config file is in plain Perl format and need to
+contain a list of application you want to run and a set of HTTP headers to
+trigger a given application.
+
+Example:
+
+  {
+    apps => [
+      '/home/web/project1/script/app1' => {
+        'X-Request-Base' => 'http://mydomain.com/whatever',
+      },
+      '/home/web/project2/script/app2' => {
+        'Host' => 'mydomain.com',
+      },
+    ],
+  }
+
+The config above will pass the request on to C<app1> when the
+"X-Request-Base" header is set to "http://mydomain.com/whatever".
+Or it will pass the request on to C<app2> if the "Host" header is
+set to "mydomain.com".
+
+You can save the content of the file anywhere, but the suggested location is
+C<$HOME/.toadfarm/toadfarm.conf>.
+
+Note: There are other special fields to trigger on, besides HTTP headers. See
+L<Toadfarm::Manual::Config/Apps> for more details.
+
+=head2 Start Toadfarm
+
+After you have saved the config file, you can start L<Toadfarm>:
+
+  $ toadfarm $HOME/.toadfarm/toadfarm.conf
+
+After this, you should see C<toadfarm> running and the applications can be
+accessed from "http://yourdomain.com:8080".
+
+=head2 Further reading
+
+See L<Toadfarm::Manual::RunningToadfarm> for more command line options, and
+L<Toadfarm::Manual::Config> for full list of config file options.
+
+=head2 Listen to standard ports
+
+Setting up an iptables rules will allow Toadfarm to listen to port 8080, while
+still receiving traffic on the default port. This is a good idea security wise,
+since it will not require Toadfarm to be started as "root".
+
+  $ iptables -A PREROUTING -i eth0 -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8080
+  $ iptables -A PREROUTING -i eth0 -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 8443
+
+Note: You need to replace "eth0" with the appropriate interface.
+
+=head1 SEE ALSO
+
+L<Toadfarm::Manual::Config>.
+
+L<Toadfarm::Manual::RunningToadfarm>.
+
+=head1 AUTHOR
+
+Jan Henning Thorsen - C<jhthorsen@cpan.org>
+
+=cut

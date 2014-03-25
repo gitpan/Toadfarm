@@ -6,144 +6,43 @@ Toadfarm - One Mojolicious app to rule them all
 
 =head1 VERSION
 
-0.41
-
-=head1 SYNOPSIS
-
-=head2 Production
-
-You can start the application by running:
-
-  $ toadfarm myconfig.conf;
-
-C<myconfig.conf> should contain a list with the application you want to run
-and a set of HTTP headers to act on. Example:
-
-  {
-    apps => [
-      'My::App' => {
-        'X-Request-Base' => 'http://mydomain.com/whatever',
-        'config' => { app_config => 123 },
-      },
-      '/path/to/my-app' => {
-        'Host' => 'mydomain.com',
-      },
-    ],
-  }
-
-The config above will run C<My::App> when the "X-Request-Base" header is set
-to "http://mydomain.com/whatever".
-
-Or it will pass the request on to C</path/to/my-app> if the "Host" header is
-set to "mydomain.com".
-
-The apps are processed in the order they are defined. This means that the
-first app that match will be executed.
-
-=head2 Application config
-
-The application will load the config as you would expect, but it is also
-possible to override the app config from the toadfarm config. This is
-especially useful when starting an app installed from cpan:
-
-  apps => {
-    # https://metacpan.org/module/App::mojopaste
-    '/usr/local/bin/mojopaste' => {
-      Host => 'p.thorsen.pm',
-      config => {
-        paste_dir => '/some/other/location
-      },
-    },
-  },
-
-NOTE! This config will be override the default application config.
-
-=head2 Debug
-
-It is possible to start the server in foreground as well:
-
-  $ MOJO_CONFIG=myconfig.conf toadfarm prefork
-  $ MOJO_CONFIG=myconfig.conf toadfarm daemon
-
-See other options by running:
-
-  $ toadfarm -h
+0.42
 
 =head1 DESCRIPTION
 
-This application can be used to load other L<Mojolicious> apps inside one app.
-This could be useful if you want to save memory or instances on dotcloud or
-heroku.
+Toadfarm is wrapper around L<hypnotoad|Mojo::Server::Hypnotoad> that allow
+you to mount many L<Mojolicious> applications inside one hypnotoad server.
 
-=head1 CONFIG FILE
+The L<Mojolicious::Plugin::Mount> plugin is useful if your applications
+are hard coupled, while Toadfarm provide functionality to route requests
+to a standalone application based on HTTP headers instead. This is
+functionality that you expect from a reverse proxy, such as Nginx.
 
-Additional config params.
-
-  {
-    apps => [...], # See SYNOPSIS
-    secrets => [qw( super duper unique string )], # See Mojolicious->secrets()
-    log => {
-      file => '/path/to/log/file.log',
-      level => 'debug', # debug, info, warn, ...
-      combined => 1, # true to make all applications log to the same file
-    },
-    hypnotoad => {
-      listen => ['http://*:1234'],
-      workers => 12,
-      # ...
-    },
-    paths => {
-      renderer => [ '/my/custom/template/path' ],
-      static => [ '/my/custom/static/path' ],
-    },
-    plugins => [
-      MojoPlugin => CONFIG,
-    ],
-  }
+=head1 DOCUMENTATION INDEX
 
 =over 4
 
-=item * log
+=item * L<Toadfarm::Manual::Intro> - Introduction.
 
-Used to set up where L<Toadfarm> should log to. It is also possible to set
-"combined" to true if you want all the other apps to log to the same file.
+=item * L<Toadfarm::Manual::Config> - Config file format.
 
-=item * hypnotoad
+=item * L<Toadfarm::Manual::RunningToadfarm> - Command line options.
 
-See L<Mojo::Server::Hypnotoad/SETTINGS> for more "hypnotoad" settings.
+=item * L<Toadfarm::Manual::BehindReverseProxy> - Toadfarm behind nginx.
 
-=item * paths
-
-Set this to enable custom templates and public files for this application.
-This is useful if you want your own error templates or serve other assets from
-L<Toadfarm>.
-
-=item * plugins
-
-"plugins" can be used to load plugins into L<Toadfarm>. The plugins are loaded
-after the "apps" are loaded. They will receive the C<CONFIG> as the third
-argument:
-
-  sub register {
-    my($self, $app, CONFIG) = @_;
-    # ...
-  }
-
-See also: L<Toadfarm::Plugin::Reload/SYNOPSIS>.
+=item * L<Toadfarm::Manual::VirtualHost> - Virtual host setup.
 
 =back
 
-=head1 EXAMPLE SETUP
-
-Look at L<https://github.com/jhthorsen/toadfarm/tree/master/etc> for example
-resources which show how to start L<Toadfarm> on ubuntu. In addition, you can
-forward all traffic to the server using the "iptables" rule below:
-
-  $ iptables -A PREROUTING -i eth0 -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8080
-
 =head1 PLUGINS
 
-L<Toadfarm::Plugin::Reload>.
+=over 4
+
+=item * L<Toadfarm::Plugin::AccessLog>
+
+=item * L<Toadfarm::Plugin::Reload>
+
+=back
 
 =cut
 
@@ -151,17 +50,9 @@ use Mojo::Base 'Mojolicious';
 use Mojo::Util 'class_to_path';
 use File::Which;
 
-our $VERSION = '0.41';
+our $VERSION = '0.42';
 
 $ENV{MOJO_CONFIG} = $ENV{TOADFARM_CONFIG} if $ENV{TOADFARM_CONFIG};
-
-=head1 METHODS
-
-=head2 startup
-
-This method will read the C<MOJO_CONFIG> and mount the applications specified.
-
-=cut
 
 sub startup {
   my $self = shift;
@@ -208,6 +99,7 @@ sub _start_apps {
     my($name, $rules) = (shift @_, shift @_);
     my $server = Mojo::Server->new;
     my $path = $name;
+    my $mount_point = delete $rules->{mount_point};
     my($app, $request_base, @over, @error);
 
     $path = File::Which::which($path) || class_to_path($path) unless -r $path;
@@ -227,11 +119,13 @@ sub _start_apps {
 
     $app->config->{$_} ||= $config->{$_} for keys %$config;
 
-    while(my($name, $value) = each %$rules) {
-      $request_base = $value if $name eq 'X-Request-Base';
-      push @over, ref $value
-        ? "return 0 unless +(\$h->header('$name') // '') =~ /$value/;\n"
-        : "return 0 unless +(\$h->header('$name') // '') eq '$value';\n";
+    for my $k (qw( remote_address remote_port )) {
+      push @over, $self->_skip_if(tx => $k, delete $rules->{$k});
+    }
+
+    for my $name (sort keys %$rules) {
+      $request_base = $rules->{$name} if $name eq 'X-Request-Base';
+      push @over, $self->_skip_if(header => $name, $rules->{$name});
     }
 
     if(@over) {
@@ -240,7 +134,10 @@ sub _start_apps {
       push @over, "\$_[1]->req->url->base(Mojo::URL->new('$request_base'));" if $request_base;
       push @over, "return 1; }";
       $routes->add_condition("toadfarm_condition_$n", => eval "@over" || die "@over: $@");
-      $routes->route('/')->detour(app => $app)->over("toadfarm_condition_$n");
+      $routes->route($mount_point || '/')->detour(app => $app)->over("toadfarm_condition_$n");
+    }
+    elsif($mount_point) {
+      $routes->route($mount_point)->detour(app => $app);
     }
     else {
       $self->{root_app} = [ $path => $app ];
@@ -264,12 +161,32 @@ sub _start_plugins {
   }
 }
 
+sub _skip_if {
+  my($self, $type, $k, $value) = @_;
+  my $format = $type eq 'tx' ? '$_[1]->tx->%s' : $type eq 'header' ? q[$h->header('%s')] : q[INVALID(%s)];
+
+  if(!defined $value) {
+    return;
+  }
+  elsif(ref $value eq 'Regexp') {
+    return sprintf "return 0 unless +($format || '') =~ /%s/;", $k, $value;
+  }
+  else {
+    return sprintf "return 0 unless +($format || '') eq '%s';", $k, $value;
+  }
+}
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2014, Jan Henning Thorsen
+
+This program is free software, you can redistribute it and/or modify it
+under the terms of the Artistic License version 2.0.
+
 =head1 AUTHOR
 
 Jan Henning Thorsen - C<jhthorsen@cpan.org>
 
 =cut
-
-1;
 
 1;
